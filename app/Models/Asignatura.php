@@ -16,4 +16,12 @@ class Asignatura extends Model
     {
         return $this->hasMany(Nota::class);
     }
+
+    // Relación N:N con Alumno
+    public function alumnos()
+    {
+        return $this->belongsToMany(Alumno::class, 'notas')
+                    ->withPivot('nota') // Incluye la columna "nota" de la tabla intermedia
+                    ->withTimestamps(); // Incluye timestamps de la tabla intermedia
+    }
 }
